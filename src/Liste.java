@@ -1,9 +1,9 @@
-public class Liste {
+public class Liste<Type> {
     public class Noeud {
-        public int valeur;
+        public Type valeur;
         public Noeud precedent, prochain;
 
-        public Noeud(int valeur) {
+        public Noeud(Type valeur) {
             this.valeur = valeur;
             this.precedent = null;
             this.prochain = null;
@@ -39,7 +39,7 @@ public class Liste {
         return nbElements == 0;
     }
 
-    public int getElementAt(int index) {
+    public Type getElementAt(int index) {
         return getNoeudAt(index).valeur;
     }
 
@@ -57,7 +57,7 @@ public class Liste {
         return null;
     }
 
-    public boolean ajouter(int valeur) {
+    public boolean ajouter(Type valeur) {
         //tableau[nbElements++] = valeur;
 
         if (estVide()) {
@@ -74,7 +74,7 @@ public class Liste {
         return true;
     }
 
-    public boolean ajouter(int valeur, int index) {
+    public boolean ajouter(Type valeur, int index) {
         if (index < -nbElements || index > nbElements)
             //throw new IndexOutOfBoundsException();
             return false;
@@ -102,12 +102,12 @@ public class Liste {
         return true;
     }
 
-    public void ajouter(Liste autre) {
+    public void ajouter(Liste<Type> autre) {
         for (int i = 0; i < autre.getNbElements(); i++)
             this.ajouter(autre.getElementAt(i));
     }
 
-    public int trouver(int valeur) {
+    public int trouver(Type valeur) {
         int index = 0;
         for (Noeud courant = premier; courant != null; courant = courant.prochain) {
             if (courant.valeur == valeur)
@@ -118,7 +118,7 @@ public class Liste {
         return -1;
     }
 
-    public boolean trouverTout(Liste autre) {
+    public boolean trouverTout(Liste<Type> autre) {
         for (int i = 0; i < autre.getNbElements(); i++)
             if (this.trouver(autre.getElementAt(i)) == -1)
                 return false;
@@ -148,10 +148,10 @@ public class Liste {
         return true;
     }
 
-    public boolean effacerTout(Liste autre) {
+    public boolean effacerTout(Liste<Type> autre) {
         boolean modifie = false;
         for (int i = 0; i < autre.getNbElements(); i++) {
-            int valeurCherchee = autre.getElementAt(i);
+            Type valeurCherchee = autre.getElementAt(i);
             int indexTrouve = this.trouver(valeurCherchee);
             if (indexTrouve != -1) {
                 effacerAt(indexTrouve);

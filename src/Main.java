@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        Liste data = new Liste();
+        Liste<Integer> data = new Liste<>();
         System.out.println(data.getNbElements());
         System.out.println(data.estVide());
 
