@@ -4,11 +4,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ListeTest {
-    Liste data;
+    Liste<Integer> vide, data;
 
     @BeforeEach
     void setUp() {
-        data = new Liste();
+        vide = new Liste<>();
+        data = new Liste<>();
         data.ajouter(1);
         data.ajouter(2);
         data.ajouter(3);
@@ -18,18 +19,14 @@ class ListeTest {
 
     @Test
     void getNbElements() {
-        assertEquals(5, data.getNbElements());
-
-        Liste vide = new Liste();
         assertEquals(0, vide.getNbElements());
+        assertEquals(5, data.getNbElements());
     }
 
     @Test
     void estVide() {
-        assertFalse(data.estVide());
-
-        Liste vide = new Liste();
         assertTrue(vide.estVide());
+        assertFalse(data.estVide());
     }
 
     @Test
@@ -71,7 +68,7 @@ class ListeTest {
 
     @Test
     void ajouterPlusieurs() {
-        Liste autre = new Liste();
+        Liste<Integer> autre = new Liste<>();
         autre.ajouter(95);
         autre.ajouter(96);
         autre.ajouter(97);
@@ -85,10 +82,21 @@ class ListeTest {
 
     @Test
     void trouver() {
+        assertEquals(0, data.trouver(1));
+        assertEquals(2, data.trouver(3));
+        assertEquals(4, data.trouver(5));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void trouverTout() {
+        Liste<Integer> autre = new Liste<>();
+        autre.ajouter(1);
+        autre.ajouter(3);
+        autre.ajouter(5);
+        assertTrue(data.trouverTout(autre));
+
+        autre.ajouter(9);
+        assertFalse(data.trouverTout(autre));
     }
 
     @org.junit.jupiter.api.Test
