@@ -99,15 +99,39 @@ class ListeTest {
         assertFalse(data.trouverTout(autre));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void effacerAt() {
+        assertTrue(data.effacerAt(4));
+        assertTrue(data.effacerAt(2));
+        assertTrue(data.effacerAt(0));
+        assertEquals(2, data.getNbElements());
+        assertEquals(2, data.getElementAt(0));
+        assertEquals(4, data.getElementAt(1));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void effacerTout() {
+        Liste<Integer> autre = new Liste<>();
+        autre.ajouter(1);
+        autre.ajouter(3);
+        autre.ajouter(5);
+        assertTrue(data.effacerTout(autre));
+
+        assertEquals(2, data.getNbElements());
+        assertEquals(2, data.getElementAt(0));
+        assertEquals(4, data.getElementAt(1));
+
+        autre.ajouter(9);
+        assertFalse(data.effacerTout(autre));
+
+        assertEquals(2, data.getNbElements());
+        assertEquals(2, data.getElementAt(0));
+        assertEquals(4, data.getElementAt(1));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testEffacerTout() {
+        data.effacerTout();
+        assertEquals(0, data.getNbElements());
     }
 }
